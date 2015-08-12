@@ -41,7 +41,23 @@ $(document).ready(function(){
 
 	 	/*--- provide feedback for guess ---*/
 
-	 	userGuessFeedback(userGuess, answer);
+	 	var userLastGuess=$('#guessList li:nth-last-child(2)').text()
+	 	userLastGuess=parseInt(userLastGuess)
+	 	var howClose=(Math.abs(userLastGuess-answer));
+	 	console.log(userLastGuess);
+	 	console.log(howClose);
+
+	 	if (userGuessCount <= 1) {
+	 		userGuessFeedback(userGuess, answer);
+	 	}
+
+	 	if (userGuessCount %2 == 0) {
+	 		userGuessFeedback(userGuess, answer);
+	 	}
+
+	 	else {
+	 		userNextGuessFeedback(howClose, userGuess, answer);
+	 	}
 
 
   	});
@@ -99,6 +115,20 @@ function userGuessFeedback(userGuess, answer) {
 	 	else if (Math.abs(userGuess-answer) == 0) {
 	 		$('#feedback').text('You win!');
 	 	}
+
+}
+
+
+function userNextGuessFeedback (howClose, userGuess, answer) {
+		console.log(Math.abs(userGuess-answer));
+
+		if (Math.abs(userGuess-answer)>howClose) {
+			$('#feedback').text('Getting colder...');
+		}
+
+		else if (Math.abs(userGuess-answer)<howClose) {
+			$('#feedback').text('Getting hotter...');
+		}
 
 }
 
