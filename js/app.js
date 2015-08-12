@@ -19,7 +19,8 @@ $(document).ready(function(){
   	
 
   	/*--- make a guess ---*/
-  	$("#guessButton").click(function(){
+  	$("#guessButton").click(function(e){
+  		e.preventDefault();
 	  	var userGuess = $('#userGuess').val()
 	  	userGuess = parseInt(userGuess)
 	  	checkUserGuess(userGuess); 
@@ -75,14 +76,6 @@ function checkUserGuess(guess) {
 	}	
 }
 
-function newGame() {
-	//reset the list of entered guesses
-	//reset the feedback
-	//reset the guess numbers to zero
-	//reset the guess input box
-	//generate a new random number
-}
-
 
 function userGuessFeedback(userGuess, answer) {
 
@@ -100,7 +93,7 @@ function userGuessFeedback(userGuess, answer) {
 	 		$('#feedback').text('Warm');
 	 	}
 
-	 	else if (Math.abs(userGuess-answer)<=10 && Math.abs(userGuess-answer)>1) {
+	 	else if (Math.abs(userGuess-answer)<=10 && Math.abs(userGuess-answer)>=1) {
 	 		$('#feedback').text('Hot');
 	 	}
 
@@ -108,4 +101,12 @@ function userGuessFeedback(userGuess, answer) {
 	 		$('#feedback').text('You win!');
 	 	}
 
+}
+
+function newGame() {
+	//reset the list of entered guesses
+	//reset the feedback
+	//reset the guess numbers to zero
+	//reset the guess input box
+	//generate a new random number
 }
