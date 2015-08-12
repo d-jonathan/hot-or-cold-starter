@@ -51,8 +51,7 @@ $(document).ready(function(){
   	
   	/*--- New game reset ---*/
   	$(".new").click(function(){
-  		alert('new game!');
-  		//newGame();
+  		answer=newGame();
   	});
 
 });
@@ -104,9 +103,10 @@ function userGuessFeedback(userGuess, answer) {
 }
 
 function newGame() {
-	//reset the list of entered guesses
-	//reset the feedback
-	//reset the guess numbers to zero
-	//reset the guess input box
-	//generate a new random number
+	$("#guessList").children().remove();
+	$('#feedback').text('Make your Guess!');
+	$("#count").text('0');
+	var answer=getRandomInt(1, 101)
+  	console.log('the answer is: '+answer); 
+  	return answer;
 }
