@@ -20,31 +20,28 @@ $(document).ready(function(){
 
   	/*--- make a guess ---*/
   	$("#guessButton").click(function(){
-
-
-
-  		//get value from text box
-	  	var userGuessCount = 0
 	  	var userGuess = $('#userGuess').val()
-		//console.log(userGuess);
-	  	//console.log(typeof(userGuess));
-	  	//console.log(parseInt(userGuess));
 	  	userGuess = parseInt(userGuess)
-	  	//check value of input for validity (numeric btwn 1-100)
 	  	checkUserGuess(userGuess); 
+
 	  	//add value to guess list  ul#guessList
 	  	$("#guessList").append("<li>"+userGuess+"</li>");
-	  	//clear input field
-	  	$('#userGuess').val('');
+
 	  	//increase guess #count
-	  	userGuessCount++;
+	  	
+	  	var userGuessCount = $('#guessList li').length;
 	  	console.log(userGuessCount);
 	  	$("#count").text(userGuessCount);
+
+
+	  	//clear input field
+	  	$('#userGuess').val('');
 	  	
 
 	 	/*--- provide feedback for guess ---*/
-	  	//bin value of input into hot, warm, cold, frigid range
-	  	//insert feedback into #feedback div
+
+	 	userGuessFeedback(userGuess, answer);
+
 
   	});
 
@@ -87,3 +84,28 @@ function newGame() {
 }
 
 
+function userGuessFeedback(userGuess, answer) {
+
+	 	console.log(Math.abs(userGuess-answer));
+
+	 	if (Math.abs(userGuess-answer)>50) {
+	 		$('#feedback').text('Brr, frigid');
+	 	}
+
+	 	else if (Math.abs(userGuess-answer)<=50 && Math.abs(userGuess-answer)>30) {
+	 		$('#feedback').text('Cold');
+	 	}
+
+	 	else if (Math.abs(userGuess-answer)<=30 && Math.abs(userGuess-answer)>10) {
+	 		$('#feedback').text('Warm');
+	 	}
+
+	 	else if (Math.abs(userGuess-answer)<=10 && Math.abs(userGuess-answer)>1) {
+	 		$('#feedback').text('Hot');
+	 	}
+
+	 	else if (Math.abs(userGuess-answer) == 0) {
+	 		$('#feedback').text('You win!');
+	 	}
+
+}
